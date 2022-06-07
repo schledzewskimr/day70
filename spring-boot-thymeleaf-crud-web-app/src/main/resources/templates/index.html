@@ -6,35 +6,36 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
-<body>
+<body style="background-color: #212529">
     <div class="container my-2">
-        <h1>Employees List</h1>
+        <h1 style="color: aliceblue">Employees List</h1>
+        <hr>
         <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
 
-        <table border="1" class="table table-dark table-striped table-responsive-md">
+        <table border="1" class="table table-dark table-striped table-responsive-md" style="border: none">
             <thead>
-                <tr>
+                <tr style="border-bottom: 3px solid darkslategray">
                     <th>
-                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}" style="text-decoration: none; color: lightslategrey;">
                             Employee First Name</a>
                     </th>
                     <th>
-                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}" style="text-decoration: none; color: lightslategrey">
                             Employee Last Name</a>
                     </th>
                     <th>
-                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                        <a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}" style="text-decoration: none; color: lightslategrey">
                             Employee Email</a>
                     </th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each = "employee : ${listEmployees}">
+                <tr th:each = "employee : ${listEmployees}" style="border-bottom: 2px solid darkslategray">
                     <td th:text = "${employee.firstName}"></td>
                     <td th:text = "${employee.lastName}"></td>
                     <td th:text = "${employee.email}"></td>
-                    <td>
+                    <td id = actionButtons style="display:flex; justify-content:space-between">
                         <a th:href="@{/showFormForUpdate/{id}(id=${employee.id})}" class="btn btn-primary">✏️</a>
                         <a th:href="@{/deleteEmployee/{id}(id=${employee.id})}" class="btn btn-danger">❌</a>
                     </td>
@@ -42,25 +43,25 @@
             </tbody>
         </table>
 
-        <div th:if="${totalPages > 1}">
+        <div th:if="${totalPages > 1}" style="color: lightslategrey">
             <div class="row col-sm-10">
                 <div class="col-sm-2">
                     Total Rows: [[${totalItems}]]
                 </div>
                 <div class="col-sm-1">
-            <span th:each="i: ${#numbers.sequence(1, totalPages)}">
-      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}">[[${i}]]</a>
-      <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+            <span th:each="i: ${#numbers.sequence(1, totalPages)}" style="color: lightslategrey">
+      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}" style="color: lightslategrey">[[${i}]]</a>
+      <span th:unless="${currentPage != i}" style="color: lightslategrey">[[${i}]]</span> &nbsp; &nbsp;
             </span>
                 </div>
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}">Next</a>
-                    <span th:unless="${currentPage < totalPages}">Next</span>
+                <div class="col-sm-1" style="color: lightslategrey">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}" style="color: lightslategrey">Next</a>
+                    <span th:unless="${currentPage < totalPages}" style="color: lightslategrey">Next</span>
                 </div>
 
-                <div class="col-sm-1">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}">Last</a>
-                    <span th:unless="${currentPage < totalPages}">Last</span>
+                <div class="col-sm-1" style="color: lightslategrey">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}" style="color: lightslategrey">Last</a>
+                    <span th:unless="${currentPage < totalPages}" style="color: lightslategrey">Last</span>
                 </div>
             </div>
         </div>
