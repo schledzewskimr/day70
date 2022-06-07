@@ -12,7 +12,7 @@
         <hr>
         <a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3">Add Employee</a>
 
-        <table border="1" class="table table-dark table-striped table-responsive-md" style="border: none">
+        <table class="table table-dark table-striped table-responsive-md" style="border: none">
             <thead>
                 <tr style="border-bottom: 3px solid darkslategray">
                     <th>
@@ -43,28 +43,30 @@
             </tbody>
         </table>
 
-        <div th:if="${totalPages > 1}" style="color: lightslategrey">
-            <div class="row col-sm-10">
-                <div class="col-sm-2">
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10" style="color: lightslategrey">
+                <div class = "col-sm-2">
                     Total Rows: [[${totalItems}]]
                 </div>
-                <div class="col-sm-1">
-            <span th:each="i: ${#numbers.sequence(1, totalPages)}" style="color: lightslategrey">
-      <a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}}" style="color: lightslategrey">[[${i}]]</a>
-      <span th:unless="${currentPage != i}" style="color: lightslategrey">[[${i}]]</span> &nbsp; &nbsp;
-            </span>
+                <div class = "col-sm-1" style="color: lightslategrey">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" style="color: lightslategrey">[[${i}]]</a>
+						<span th:unless="${currentPage != i}" style="color: lightslategrey">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
                 </div>
-                <div class="col-sm-1" style="color: lightslategrey">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}}" style="color: lightslategrey">Next</a>
+                <div class = "col-sm-1" style="color: lightslategrey">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" style="color: lightslategrey">Next</a>
                     <span th:unless="${currentPage < totalPages}" style="color: lightslategrey">Next</span>
                 </div>
 
                 <div class="col-sm-1" style="color: lightslategrey">
-                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}}" style="color: lightslategrey">Last</a>
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" style="color: lightslategrey">Last</a>
                     <span th:unless="${currentPage < totalPages}" style="color: lightslategrey">Last</span>
                 </div>
             </div>
         </div>
+
+
     </div>
 </body>
 </html>
